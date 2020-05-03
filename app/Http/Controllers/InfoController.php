@@ -35,7 +35,7 @@ class InfoController extends Controller
     public function import() 
     {
         Excel::import(new SuperImport,request()->file('file'));
-           
+        
         return back();
     }
     public function showDB()
@@ -44,14 +44,11 @@ class InfoController extends Controller
         //$graf = new Lavacharts();
         $valor = \Lava::DataTable();
         $valores = Sensor::select('tempAmb')->get();
-        
         $valor->addStringColumn('X')
              ->addNumberColumn('Y')
              ->getRows(['Amb', $valores]);
-             \Lava::LineChart(
-                 'teste', $valor,
-                  ['title' =>'vaidarbom']);
-        //$dados = DB::table('sensors')->select('tempAmb')->get();
+             \Lava::LineChart('teste', $valor,['title' =>'vaidarbom']);
+        print_r($valores);
         return view('freios');
         
 

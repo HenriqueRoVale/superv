@@ -4,9 +4,8 @@ namespace App\Imports;
 
 use App\Sensor;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class SuperImport implements ToModel, WithHeadingRow
+class SuperImport implements ToModel
 {
     /**
     * @param array $row
@@ -15,13 +14,17 @@ class SuperImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+
+        
+    if($row[0] != ''){
         return new Sensor([
-            'id' => $row['id'],
-            'tempAmb'  => $row['tempAmb'], 
-            'tempEsp' => $row['tempEsp'],
-            'pf1' => $row['pf1'],
-            'pf2' => $row['pf2'],
-            'pPedal' => $row['pPedal'],
+            //'id' => $row[0] => Não faz muito sentido inserir o id, então cuidado
+            'tempAmb'  => $row[1], 
+            'tempEsp' => $row[2],
+            'pf1' => $row[3],
+            'pf2' => $row[4],
+            'pPedal' => $row[5],
         ]);
+    }           
     }
 }
