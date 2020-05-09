@@ -41,15 +41,25 @@ class InfoController extends Controller
     public function showDB()
     {
         //$dados1 = Sensor::get();
-        //$graf = new Lavacharts();
+        //$lava = new Lavacharts();
+        //$valor = $lava->DataTable();
         $valor = \Lava::DataTable();
         $valores = Sensor::select('tempAmb')->get();
+        foreach($valores as $amb ){
+            $count[] = count($amb);
+        } 
+        //for($i=0; $i < $count; $i++){}
         $valor->addStringColumn('X')
              ->addNumberColumn('Y')
-             ->getRows(['Amb', $valores]);
-             \Lava::LineChart('teste', $valor,['title' =>'vaidarbom']);
+             ->addRow([$valores, $amb])
+            // ->getRows(['Amb', $valores]);
+            \Lava::LineChart('teste', $valor,['title' =>'vaidarbom']);
         print_r($valores);
+        //echo ($valores);
         return view('freios');
+            
+        
+        
         
 
     
