@@ -45,16 +45,15 @@ class InfoController extends Controller
         //$valor = $lava->DataTable();
         $valor = \Lava::DataTable();
         $valores = Sensor::select('tempAmb')->get();
-        foreach($valores as $amb ){
-            $count[] = count($amb);
-        } 
+        // foreach($valores as $amb ){
+        //     $count[] = count($amb);
+        // } 
         //for($i=0; $i < $count; $i++){}
         $valor->addStringColumn('X')
-             ->addNumberColumn('Y')
-             ->addRow([$valores, $amb])
-            // ->getRows(['Amb', $valores]);
-            \Lava::LineChart('teste', $valor,['title' =>'vaidarbom']);
-        print_r($valores);
+             ->addNumberColumn('Y');
+            //  ->addRow([$valores, $amb]);
+        $teste = \Lava::LineChart('teste', $valor,['title' =>'vaidarbom']);
+        // print_r($valores);
         //echo ($valores);
         return view('freios');
             
